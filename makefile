@@ -12,20 +12,10 @@ ARCHIVED ?= NO
 CFLAGS ?= -Wall -Wextra -Oz
 CXXFLAGS ?= -Wall -Wextra -Oz
 
-# font options
-
-# ----------------------------
-
-ifndef CEDEV
-$(error CEDEV environment path variable is not set)
-endif
-
-include $(CEDEV)/meta/makefile.mk
-
-# ----------------------------
+# font option
 
 FONTPACKNAME ?= DRSANS
-FONTDIR ?= fonts
+FONTDIR ?= ${SRCDIR}}/fonts
 
 $(BINDIR)/$(FONTPACKNAME).bin: $(FONTDIR)/drsans-06-bold.fnt $(FONTDIR)/drsans-06-normal.fnt $(FONTDIR)/drsans-07-bold.fnt $(FONTDIR)/drsans-07-normal.fnt $(FONTDIR)/drsans-09-bold.fnt $(FONTDIR)/drsans-09-normal.fnt
 	$(Q)$(call MKDIR,$(@D))
@@ -43,4 +33,17 @@ $(BINDIR)/$(FONTPACKNAME).bin: $(FONTDIR)/drsans-06-bold.fnt $(FONTDIR)/drsans-0
 $(BINDIR)/$(FONTPACKNAME).8xv: $(BINDIR)/$(FONTPACKNAME).bin
 	$(Q)$(call MKDIR,$(@D))
 	$(Q)convbin --iformat bin --input $(BINDIR)/$(FONTPACKNAME).bin --oformat 8xv --output $(BINDIR)/$(FONTPACKNAME).8xv --archive --name $(FONTPACKNAME)
+
+
+DEPS ?= $(BINDIR)/$(FONTPACKNAME).bin $(BINDIR)/$(FONTPACKNAME).8xv
+
+# ----------------------------
+
+ifndef CEDEV
+$(error CEDEV environment path variable is not set)
+endif
+
+include $(CEDEV)/meta/makefile.mk
+
+# ----------------------------
 
