@@ -37,7 +37,6 @@ struct text_file
     contents_block_t* block_head;
     uint8_t file_settings[NUM_OF_SETTINGS], fonts_used_size;  
     fontlib_font_t* fonts_used[];
- 
 };
 
 fontlib_font_pack_t *get_font_pack(char* name)
@@ -88,7 +87,6 @@ uint8_t* get_default_settings()
             //settings shit
             return settings;
         }
-        
     }
     os_ThrowError(-1);
     return NULL;
