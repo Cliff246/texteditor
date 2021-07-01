@@ -17,3 +17,5 @@ char* read_file(ti_file_t* file,uint16_t count);
 void write_file(ti_file_t* file,char* write,uint32_t size);
 
 void* get_ptr_file(ti_file_t* file);
+
+bool exists_file(char* name);
