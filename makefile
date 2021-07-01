@@ -4,7 +4,6 @@
 # ----------------------------
 
 NAME ?= textedit
-ICON ?= icon.png
 DESCRIPTION ?= "text editor with basic fonts"
 COMPRESSED ?= NO
 ARCHIVED ?= NO
@@ -17,7 +16,6 @@ $(error CEDEV environment path variable is not set)
 endif
 
 include $(CEDEV)/meta/makefile.mk
-
 
 # font option
 FONTDIR := $(SRCDIR)/fonts
