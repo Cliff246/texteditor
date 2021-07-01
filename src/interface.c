@@ -113,5 +113,4 @@ text_file_t* new_text_file(char* name,fontlib_font_t* fonts[],uint8_t fonts_used
     }  
     os_ThrowError(-1);    
     return NULL;
-    
 }
