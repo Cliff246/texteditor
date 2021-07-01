@@ -140,20 +140,22 @@ _new_text_file:
 	push	hl
 	push	iy
 	call	_calloc
-	ld	de, (ix + 6)
-	ld	(ix + -3), hl
+	ld	bc, (ix + 6)
+	push	hl
+	pop	de
 	pop	hl
 	pop	hl
-	push	de
+	push	bc
 	pop	hl
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
+	ld	(ix + -3), de
 	jq	nz, BB4_3
-	ld	de, L_.str.1
+	ld	bc, L_.str.1
 BB4_3:
-	ld	(ix + -6), de
-	push	de
+	ld	(ix + -6), bc
+	push	bc
 	call	_exists_file
 	pop	hl
 	ld	l, 1
@@ -180,8 +182,6 @@ BB4_6:
 	ld	hl, -1
 	push	hl
 	call	_os_ThrowError
-	pop	hl
-	ld	hl, 0
 	jq	BB4_10
 BB4_9:
 	ld	(ix + -12), de
@@ -200,22 +200,19 @@ BB4_9:
 	ld	a, (ix + 12)
 	ld	iy, (ix + -3)
 	ld	(iy + 8), a
-	ld	iy, (ix + -3)
 	ld.sis	hl, 0
 	ld	(iy + 3), l
 	ld	(iy + 4), h
-	ld	hl, (ix + -3)
-	ld	de, (ix + -12)
-	ld	(hl), de
-	ld	iy, (ix + -3)
+	ld	hl, (ix + -12)
+	ld	(iy), hl
 	ld	hl, 0
 	ld	(iy + 5), hl
 	ld	hl, (ix + -6)
 	push	hl
 	call	_free
-	ld	hl, (ix + -3)
-	pop	de
 BB4_10:
+	pop	hl
+	ld	hl, (ix + -3)
 	ld	sp, ix
 	pop	ix
 	ret
